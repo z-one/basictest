@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-lazy-init="false">
+
+	<description>Spring公共配置 </description>
+	<bean id="testBean" class="com.spring.test.bean.TestBean"/>
+	<bean id="testSon" class="com.spring.test.son.TestSon"/>
+	<bean id="testBean2" class="com.spring.test.bean.TestFactoryBean"/>
+	
+	<!--1.构造器无法解决循环依赖-->
+	<!--<bean id="classA" class="com.TestSpring.currently.ClassA">
+			<constructor-arg index="0" ref="classB"/>
+		</bean>
+		<bean id="classB" class="com.TestSpring.currently.ClassB">
+			<constructor-arg index="0" ref="classC"/>
+		</bean>
+		<bean id="classC" class="com.TestSpring.currently.ClassC">
+			<constructor-arg index="0" ref="classA"/>
+		</bean>-->
+		
+	<!-- 2.setter注入循环依赖可以解决，利用FactoryBean -->
+	<!--
+	<bean id="classA" class="com.TestSpring.currently.ClassA" >
+		<property name="b" ref="classB"></property>
+	</bean>
+	<bean id="classB" class="com.TestSpring.currently.ClassB" >
+		<property name="c" ref="classC"></property>
+	</bean>
+	<bean id="classC" class="com.TestSpring.currently.ClassC" >
+		<property name="a" ref="classA"></property>
+	</bean>-->
+	
+	<context:component-scan base-package="com.spring.test.currently" />
+</beans>
