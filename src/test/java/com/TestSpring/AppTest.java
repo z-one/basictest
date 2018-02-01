@@ -1,5 +1,7 @@
 package com.TestSpring;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,5 +15,18 @@ public class AppTest
     public void test()
     {
         System.out.println("test!");
+    }
+    
+    
+    @Before
+    public void testBefore()
+    {
+        System.out.println("test Before!");
+    }
+    
+    @After
+    public void testAfter()
+    {
+        System.out.println("test Afetr!");
     }
 }
