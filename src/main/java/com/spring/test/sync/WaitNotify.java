@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.spring.test.utils.SleepUtils;
 
-
 public class WaitNotify
 {
     static boolean flag = true;
@@ -23,6 +22,24 @@ public class WaitNotify
         notifyThread.start();
     }
     
+    /**
+     * <pre>
+     *  等待方准守原则：
+     *  1.获取对象锁
+     *  2.如果条件不满足，那么调用对象的wait方法，被通知后仍需要条件检查 
+     *  3.条件满足则执行对应代码逻辑
+     *  
+     *  伪代码：
+     *  synchronized(对象){
+     *    while(条件不满足){
+     *       对象.wait();
+     *    }
+     *  }
+     *  对应业务逻辑
+     * </pre>
+     * 
+     * @author nullable
+     */
     static class Wait implements Runnable
     {
         @Override
@@ -49,6 +66,24 @@ public class WaitNotify
         }
     }
     
+    /**
+     * <pre>
+     * 1.获得对象的锁
+     * 2.改变条件
+     * 3.通知所有等待在对象的线程
+     * 
+     * 伪代码：
+     *  synchronized(对象){
+     *   改变条件
+     *   对象.notifyAll();
+     *  }
+     * </pre>
+     *
+     * @author Administrator
+     * @version [版本号, 2018年2月3日]
+     * @see [相关类/方法]
+     * @since [产品/模块版本]
+     */
     static class Notify implements Runnable
     {
         @Override
