@@ -6,8 +6,13 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
 
-import com.spring.test.utils.SleepUtils;
-
+/**
+ * 请参考这篇文章进行的性能测试
+ * https://www.javacodegeeks.com/2010/08/java-best-practices-vector-arraylist.html
+ *
+ * @author nullable
+ * @version [版本号, 2018年2月7日]
+ */
 public class ListOrVectorTest
 {
     public static void main(String[] args)
@@ -35,16 +40,16 @@ public class ListOrVectorTest
         
         for (int i = 0; i < 5000; i++)
         {
-//            new Thread(new Runnable()
-//            {
-//                @Override
-//                public void run()
-//                {
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
                     list.add(System.currentTimeMillis() + "i");
-                    //SleepUtils.second(2);
+                    // SleepUtils.second(2);
                     latch.countDown();
-//                }
-//            }).start();
+                }
+            }).start();
         }
         
         try
