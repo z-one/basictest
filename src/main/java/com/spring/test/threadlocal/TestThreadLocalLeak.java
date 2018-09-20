@@ -33,6 +33,10 @@ public class TestThreadLocalLeak {
         System.out.println("GC后：key:" + memeory.threadId);
         System.out.println("GC后：value-size:" + refelectThreadLocals(Thread.currentThread()));
 
+        //进一步回收，保证ThreadLocal实例被回收
+        memeory=null;
+        System.gc();
+
         // 模拟线程一直运行
         while (true) {
         }
