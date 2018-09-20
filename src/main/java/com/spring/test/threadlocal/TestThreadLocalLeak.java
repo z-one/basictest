@@ -1,11 +1,11 @@
 
 package com.spring.test.threadlocal;
 
-import org.springframework.util.ReflectionUtils;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.util.ReflectionUtils;
 
 /**
  * @author ponyzi
@@ -88,7 +88,7 @@ public class TestThreadLocalLeak {
                     result.add(keyvalue);
                 }
             }
-            return ((ArrayList) result.get(0)).size();
+            return ((ArrayList<?>) result.get(0)).size();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
